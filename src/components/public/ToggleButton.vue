@@ -11,16 +11,16 @@ export default {
   name: 'ToggleButton',
   props: {
     value: {
-      type: Boolean,
-      default: false
+      type: String,
+      default: 'Active'
     },
 
   },
   data(){
-
-    const checked = this.value?true:false;
-    const left_pos= this.value?'2.8em':'0em';
-    const switch_color = this.value?'#44bd32':'#D50000';
+    console.log(this.value);
+    const checked = this.value=='Active'?true:false;
+    const left_pos= this.checked?'2.8em':'0em';
+    const switch_color = this.checked?'#44bd32':'#D50000';
   	return{
       checked,
       left_pos,
@@ -34,6 +34,20 @@ export default {
     },
   },
   watch:{
+    'value':function(newVal, oldVal)
+    {
+      if(newVal == 'Active')
+      {
+        this.checked = true;
+      }
+      else
+      {
+        this.checked = false;
+      }
+    },
+
+
+
     'checked':function(newVal, oldVal)
     {
       if(newVal)

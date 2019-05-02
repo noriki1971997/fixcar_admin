@@ -35,9 +35,20 @@ export default {
         	status:'Active'
 	    	};*/
 	    	return new Promise((resolve, reject) => {
-	            axios.get("http://13.67.50.208:3003/api/"+user_id+"/profile")
+	            axios.get("http://13.67.50.208:3003/api/user/"+user_id)
 	            .then(resp => {
 	                console.log(resp);
+	                let user_detail = {
+	                	id:resp.data.data.id,
+	                	Name:resp.data.data.profle.full_name,
+	                	Email:resp.data.data.email,
+	                	Birthday:resp.data.data.profle.birthday,
+	                	PhoneNumber:resp.data.data.phone,
+	                	Address:"",
+	                	isProvider:false,
+	                	status:'Block'
+	                };
+	                resolve(user_detail);
 	            })
 	            .catch(err => {
 	                reject(err)

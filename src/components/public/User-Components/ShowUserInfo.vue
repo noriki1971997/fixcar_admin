@@ -23,7 +23,7 @@
         </div>
 
         <div class="basic-info" :class="$mq">
-          <span class="info-line" :class="$mq"><i class="fas fa-paperclip icon-info"></i><a :class="$mq">{{user_data.Ho}} {{user_data.Ten}}</a></span>
+          <span class="info-line" :class="$mq"><i class="fas fa-paperclip icon-info"></i><a :class="$mq">{{user_data.Name}}</a></span>
           <span class="info-line" :class="$mq"><i class="far fa-envelope icon-info"></i><a :class="$mq">{{user_data.Email}}</a></span>
           <span class="info-line" :class="$mq"><i class="fas fa-mobile-alt icon-info"></i><a :class="$mq">{{user_data.PhoneNumber}}</a></span>
           <span class="info-line" :class="$mq"><i class="fas fa-birthday-cake icon-info"></i><a :class="$mq">{{user_data.Birthday}}</a></span>
@@ -34,7 +34,7 @@
           <span class="info-line" :class="$mq">
             <i class="fas fa-key icon-info"></i>
             <a class="activeBtn">
-              <ToggleButton :value="(user_data.status=='Active')?true:false"></ToggleButton>
+              <ToggleButton :value="user_data.status"></ToggleButton>
             </a>
           </span>
           <span :class="$mq" class="info-line note-click" @mouseover="isAbleClickPanel=true" @mouseout="isAbleClickPanel=false">Click để xem thông tin nhà cung cấp >></span>
@@ -135,8 +135,7 @@ export default {
   	return{
       user_data:{
         id:0,
-        Ho:'',
-        Ten:'',
+        Name:"",
         Email:'',
         Birthday:'',
         PhoneNumber:'',
@@ -196,7 +195,8 @@ export default {
     heightBack()
     {
       return this.$mq ==='mobile' ? '18em' : '36em'
-    }
+    },
+
   },
   watch:{
     'flipper':function(newVal,oldVal)
@@ -223,6 +223,7 @@ export default {
     .then(resp => 
       { 
         this.user_data = resp;
+        console.log(this.user_data.status);
       })
     .catch(err => console.log(err)); 
   }
