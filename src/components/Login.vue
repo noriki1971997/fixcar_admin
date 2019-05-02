@@ -1,72 +1,149 @@
 <template>
-  <div id="login">
+  <div id="login" :class="$mq">
 
-    <h1>LOGIN</h1>
-    <input type="text" placeholder="Email" @input="showNoticeUsName">
+    <h1 :class="$mq" class="title-login">LOGIN</h1>
+    <input type="text" placeholder="Email" @input="showNoticeUsName" :class="$mq">
     <i :style={visibility:visibilityUN}>{{msgErrorUserName}}</i>
-    <input type="password" placeholder="Password" @input="showNoticePssword">
+    <input :class="$mq" type="password" placeholder="Password" @input="showNoticePssword">
     <i :style={visibility:visibilityPW}>{{msgErrorPassword}}</i>
-    <button @click="goToDashBoard">OK</button>
+    <button :class="$mq" @click="goToDashBoard">OK</button>
+
   </div>
   
 </template>
 
 
 <style>
-  body{
-    background-color: #3c6382;
-  }
+/*Login page-------------------------------------------------*/
   #login{
     background-color: #031E27;
-    width: 400px;
-    height: 400px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     text-align: center;
-    border-radius: 30px;
+    border-radius: 2em;  
+    font-size: 16px;
   }
-  #login h1{
-    margin-top: 50px;
-    margin-bottom: 60px;
+  #login.mobile
+  {
+    width: 16em;
+    height: 16em;
+  }
+  #login.desktop
+  {
+    width: 25em;
+    height: 25em;
+  }
+  #login.tablet
+  {
+    width: 20em;
+    height: 20em;
+  }
+  /*title login----------------------------------------------*/
+  .title-login{
     color: white;
     font-weight: 500;
     font-family: Amazone BT;
     }
+  .title-login.mobile
+  {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    font-size: 1.4em;
+  }
+  .title-login.tablet
+  {
+    margin-top: 1em;
+    margin-bottom: 1.2em;
+    font-size: 2em;
+  }
+  .title-login.desktop
+  {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    font-size: 2.4em;
+  }
+ /*----------------------------------------------------------*/
+
+  /*Input text-----------------------------------------------*/
   #login input[type="text"],div input[type="password"]{
     background: none;
     border: 2px solid #25CFC7;
     display: block;
-    text-align: center;
-    margin: 5px auto;
-    padding: 14px 10px;
-    width: 200px;
+    text-align: center;   
     outline: none;
-    color: white;
-    border-radius: 24px;
+    color: white;  
     transition: 0.25s
   }
+  /*responsive*/
+  #login input[type="text"].desktop,div input[type="password"].desktop
+  {
+    margin: 0.2em auto;
+    padding: 1em 3em;
+    width: 14em;
+    border-radius: 2em;
+  }
+  #login input[type="text"].tablet,div input[type="password"].tablet
+  {
+    margin: 0.05em auto;
+    padding: 0.8em 2.5em;
+    width: 12.5em;
+    border-radius: 2em;
+  }
+  #login input[type="text"].mobile,div input[type="password"].mobile
+  {
+    margin: 0.05em auto;
+    padding: 0.5em 1.8em;
+    width: 10em;
+    border-radius: 2em;
+  }
+
+  /*responsive*/
   #login input[type="text"]:focus,div input[type="password"]:focus{
-    width: 280px;
+    width: 17.5em;
     border-color: #EEDC0B;
   }
+  #login input[type="text"].mobile:focus,div input[type="password"].mobile:focus{
+    width: 12em;
+    border-color: #EEDC0B;
+  }
+  /*----------------------------------------------------------*/
+  /*Button login----------------------------------------------*/
   #login button{
     background: none;
     border: 2px solid #25CFC7;
     display: block;
-    text-align: center;
-    margin: 10px auto;
-    padding: 14px 40px;
+    text-align: center;   
     outline: none;
-    color: white;
-    border-radius: 24px;
+    color: white;   
     transition: 0.25s;
     cursor: pointer;
   }
+
+  /*responsive*/
+   #login button.desktop
+   {
+    margin: 0.8em auto;
+    padding: 0.8em 2em;
+    border-radius: 24px;
+   }
+   #login button.tablet
+   {
+    margin: 0.8em auto;
+    padding: 0.8em 2em;
+    border-radius: 24px;
+   } 
+   #login button.mobile
+   {
+    margin: 0.8em auto;
+    padding: 0.5em 1.5em;
+    border-radius: 24px;
+   } 
   #login button:hover{
     background: #168CC6; 
   }
+  /*----------------------------------------------------------*/
   #login i{
     color: red;
   }
@@ -149,7 +226,7 @@ export default {
           }
           this.$store.dispatch('auth/login',data)
           .then(() => this.$router.push('/dashBoard'))
-          .catch(err => console.log(err))
+          .catch(err => console.log(err));
        
       }
   }

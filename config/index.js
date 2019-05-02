@@ -9,7 +9,7 @@ module.exports = {
 
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: 'fixcar_admin',
+    assetsPublicPath: '/',
     proxyTable: {},
 
     // Various Dev Server settings

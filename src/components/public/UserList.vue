@@ -1,8 +1,9 @@
 <template>
-	<div>
+	<div class="background_cover" :class="$mq">
 		<transition>
       <keep-alive>
         <router-view></router-view>
+         <img src="https://c.pxhere.com/images/76/da/95e0136b716eef371eb788907dca-1452559.jpg!d">
       </keep-alive>
     </transition>
 	</div>
@@ -32,4 +33,32 @@ export default {
 </script>
 
 <style>
+.background_cover {
+    min-width: 100%;
+    width: 100%;
+    background-image: url(https://c.pxhere.com/images/76/da/95e0136b716eef371eb788907dca-1452559.jpg!d);
+    background-attachment: scroll;
+    background-size: cover;
+    background-repeat: repeat;
+  }
+  .background_cover.mobile
+  {
+    height: 50em;
+  }
+  .background_cover.tablet
+  {
+    height: 80em;
+  }
+  .background_cover.desktop
+  {
+    height: 100em;
+  }
+
+
+
+  .background_cover img {
+    visibility: hidden;
+    width: 100%;
+    height: auto;
+  }
 </style>

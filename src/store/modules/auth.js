@@ -27,9 +27,10 @@ export default {
 	  	login({commit}, user){
 	        return new Promise((resolve, reject) => {
 	            commit('auth_request')
-	            axios.post("http://31.220.55.113:3002/api/auth/login", user)
+	            axios.post("http://13.67.50.208:3003/api/auth/login", user)
 	            .then(resp => {
-	                const token = resp.data.token
+	                const token = resp.data.data.token
+	                console.log(token)
 	                localStorage.setItem('token', token)
 	                // Add the following line:
 	                axios.defaults.headers.common['Authorization'] = token

@@ -2,7 +2,10 @@
 	<router-view></router-view>
 </template>
 <style>
- 
+ body
+  {
+    background-color: #3c6382;
+  }
 </style>
 <script>
 import router from 'vue-router';
@@ -11,6 +14,7 @@ export default {
       isLoggedIn : function(){ return this.$store.getters['auth/isLoggedIn']}
     },
     created: function () {
+      console.log(this.isLoggedIn);
       if(this.isLoggedIn)
       {
         this.$router.push('/dashBoard');
@@ -23,7 +27,8 @@ export default {
           throw err;
         });
       });
+
     }
-  }
+  };
 </script>
 

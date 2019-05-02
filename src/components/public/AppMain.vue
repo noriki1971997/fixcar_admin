@@ -17,7 +17,7 @@
 			</div>
 		</Menu>
 		<div class="wrap-content">
-        	<i class="fas fa-bars fa-2x btn-openMenu" @click="openMenu"></i>
+        	<i :class="$mq" class="fas fa-bars fa-2x btn-openMenu" @click="openMenu"></i>
       		<component v-bind:is="nameOfComponent"></component>
 		</div>
 	</div>
@@ -63,17 +63,35 @@
 		position: relative;
 		margin-left: auto;
 		margin-right: auto;
-		width: 80em;
+		width: 100%;
 		height:auto;
 		display: inline-grid;
-		min-height: 50em;
+		min-height: 30em;
 	}
+
 	.btn-openMenu{
-	    position: absolute;
-	    margin-top: 2em;
-	    font-size: 16px;
-	    color: #ea1d5d;
-	    left: 5%;
+	    position: absolute;	    
+	    color: white;	    
+  	}
+
+  	/*responsive*/
+  	.btn-openMenu.mobile
+  	{
+  		font-size: 16px;
+  		margin-top: 3em;
+  		left: 5%;
+  	}
+  	.btn-openMenu.tablet
+  	{
+  		font-size: 22px;
+  		margin-top: 3em;
+  		left: 5%;
+  	}
+  	.btn-openMenu.desktop
+  	{
+  		margin-top: 2em;
+  		font-size: 32px;
+  		left: 5%;
   	}
 </style>
 <script>

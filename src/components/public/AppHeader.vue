@@ -1,19 +1,22 @@
 <template>
-	<div id="AppHeader">
+	<div id="AppHeader" :class="$mq">
 		<img src="../../assets/fix-car-icon.png">
-    <span id="sologan">Fix car service</span>
-    <div id="hello-admin">
+
+    <mq-layout mq="desktop">
+      <span id="sologan">Fix car service</span>
+    </mq-layout>
+
+    <div id="hello-admin" :class="$mq">
       <span>Hello, Admin!!</span>
-      <button id="logout-btn" @click="Logout"></button>
+      <button id="logout-btn" @click="Logout" :class="$mq"></button>
     </div>
 		
 	</div>
 </template>
 <style>
   #AppHeader {
-  	font-size: 10px;
-  	background-color: #4280f4;
-  	height: 8em;
+  	font-size: 16px;
+    background-color: #020201;	
   	width:100vw;
   	position: relative;
   	margin-left: -50vw;
@@ -21,6 +24,23 @@
   	margin-top: -1em;
     display: flex;
   }
+  #AppHeader.mobile
+   {
+    height: 4em;
+   }
+  #AppHeader.tablet
+   {
+    height: 4em;
+   }
+  #AppHeader.desktop
+   {
+    font-size: 1.5em;
+    height: 4em;
+   }
+
+
+
+
   #AppHeader img{
   	position: absolute;
     top: 25%;
@@ -34,16 +54,35 @@
     font-family: Lobster;
     color: white;
   }
+
+
+  /*Text and logout button----------------------------------------------------*/
   #hello-admin{
-    position: absolute;
-    top: 50%;
-    left: 85%;
+    position: absolute;    
     transition: 3s;
-    transform: translate(-50%,-50%);
-    width: 180px;
+    transform: translate(-50%,-50%);  
   }
+  #hello-admin.desktop
+  {
+    top: 60%;
+    left: 85%;
+    width: 12em;
+  }
+  #hello-admin.tablet
+  {
+    top: 60%;
+    left: 80%;
+    width: 12em;
+  }
+  #hello-admin.mobile
+  {
+    top: 60%;
+    left: 80%;
+    width: 10em;
+  }
+
+
   #hello-admin span{
-    font-size: 20px;
     color: white;
     background:none;
     font-family: Lobster;
@@ -55,17 +94,37 @@
     transition: 1s;
     transform:translateX(50%);
   }
+  /*logout button----------------------------------------------*/
   #logout-btn
   {
     background-image:none;
-    background-size: 30px 30px;
-    width: 30px;
-    height: 30px;
-    background-color: #4280f4;
+    background-color: #020201; 
     border: none;
     display: flex;
     justify-content: center;
   }
+  #logout-btn.desktop
+  {
+    background-size: 2.2em 2.2em;
+    width: 2.2em;
+    height: 2.2em;
+  }
+  #logout-btn.tablet
+  {
+    background-size: 1.6em 1.6em;
+    width: 1.6em;
+    height: 1.6em;
+  }
+  #logout-btn.mobile
+  {
+    background-size: 1.4em 1.4em;
+    width: 1.4em;
+    height: 1.4em;
+  }
+
+
+
+
   @font-face{
     font-family: Lobster;
     src: url(../../assets/Lobster/Lobster_1.3.otf);

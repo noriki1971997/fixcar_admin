@@ -46,7 +46,7 @@ routes:
             name: 'DashBoard-UserList-ShowUserList',
           },
           {
-            path:':name',
+            path:':userid',
             component: ShowUserInfo,
             name: 'DashBoard-UserList-ShowUserInfo',
             props: true,

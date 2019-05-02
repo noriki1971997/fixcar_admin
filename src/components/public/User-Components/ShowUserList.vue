@@ -1,17 +1,17 @@
 <template>
-	<div class="table-content">
-    <div class="title-UserList">
-      <h1>Danh sách người dùng</h1>
+	<div class="table-content" :class="$mq">
+    <div class="title-UserList-wrap">
+      <h1 :class="$mq" class="title-UserList">Danh sách người dùng</h1>
     </div>
-    <div class="userlist-table">
-      <table-component :data="usersDataFunc" :show-caption="false" @filterContent="filterChanged" ref="table">
-         <table-column show="ID" label="ID"></table-column>
-         <table-column show="Ho" label="Họ"></table-column>
-         <table-column show="Ten" label="Tên"></table-column>
-         <table-column show="TrangThai" label="Trạng thái" :filterable="false"></table-column>
+    <div class="userlist-table" :class="$mq">
+      <table-component :data="usersDataFunc" :show-caption="false" @filterContent="filterChanged" ref="table" :class="$mq">
+         <table-column show="id" label="Id"></table-column>
+         <table-column show="email" label="Email"></table-column>
+         <table-column show="phone" label="Số điện thoại"></table-column>
+         <table-column show="status" label="Trạng thái" :filterable="false"></table-column>
          <table-column label="" :sortable="false" :filterable="false">
            <template slot-scope="row">
-              <i class="far fa-eye" @click="viewUserInfo(row.Ho)"></i>
+              <i class="far fa-eye" @click="viewUserInfo(row.id)"></i>
            </template>
          </table-column>
          <table-column label="" :sortable="false" :filterable="false">
@@ -21,15 +21,20 @@
          </table-column>
       </table-component>
     </div>
+    <customDialog ref="dialog"></customDialog>
+    <customDialog ref="notification">
+      <footer></footer>
+    </customDialog>
 	</div>
 </template>
 <script>
+import customDialog from '../CustomDialog.vue'
 export default {
   name: 'ShowUserList',
   data(){
   	return{
     usersData :{
-    data : [{ID:"123",Ho:"Nguyen",Ten:"Viet Phi 1",TrangThai:"Active"}],
+    data : [],
     pagination : 
     {
         currentPage : 1,
@@ -42,30 +47,33 @@ export default {
   watch:{
     'usersData.pagination.currentPage':function(newVal, oldVal)
     {
-      let filter = this.filter;
-      let curPage = newVal;
+      let key_words = this.filter;
+      let page = newVal;
+      let per_page = 2;
       let data = {
-                  filter:filter,
-                  curPage:curPage}; 
+              key_words:key_words,
+              page:page,
+              per_page:per_page
+                }; 
       this.$store.dispatch('user/getUserList',data)
       .then(resp => 
       { 
         this.usersData = resp;
+        console.log(resp);
         this.$refs.table.refresh();
       })
       .catch(err => console.log(err));
-    }
+    }     
   },
   computed:{
 
   },
   components:{
-  
+  customDialog
   },
   methods:{
-  	viewUserInfo:function function_name(Ho) {
-         this.Ho = Ho;
-         this.$router.push({ name: 'DashBoard-UserList-ShowUserInfo', params: { name: this.Ho } });
+  	viewUserInfo:function function_name(ID) {
+         this.$router.push({ name: 'DashBoard-UserList-ShowUserInfo', params: { userid: ID } });
     },
 
     usersDataFunc:function function_name()
@@ -76,34 +84,72 @@ export default {
     filterChanged:function(value)
     {
       this.filter = value;
+      console.log('tim kiem'+value);
+
+      let key_words = this.filter;
+      let page = 1;
+      let per_page = 2;
+      let data = {
+              key_words:key_words,
+              page:page,
+              per_page:per_page
+                }; 
+      this.$store.dispatch('user/getUserList',data)
+      .then(resp => 
+      { 
+        this.usersData = resp;
+        console.log(resp);
+        this.$refs.table.refresh();
+      })
+      .catch(err => console.log(err));
+
     },
 
-    deleteUser(Ten)
+    deleteUser(ID)
     {
-      this.$dialog.confirm("Nếu xóa bảng ghi này thì sẽ không hoàn tác được.Bạn muốn tiếp tục", {
-          loader: true}).then(dialog => {
-            
-            setTimeout(() => {
-                        console.log('Xóa hoàn thành');
-                        dialog.close();
-            }, 2500);
-          })
-                        .catch(() => {
-            console.log('Hủy xóa');
-      });
+      this.$refs.dialog.open("Xác nhận","Nếu xóa bảng ghi này thì sẽ không hoàn tác được. Bạn muốn tiếp tục ?").then((dialog) =>{
+            this.$store.dispatch('user/deleteUser',ID)
+            .then(resp => 
+            { 
+              //show noti detele successfully
+              this.$refs.notification.open(resp);
+
+              /*let key_words = this.filter;
+              let page = this.currentPage;
+              let per_page = 2;
+              let data = {
+                key_words:key_words,
+                page:page,
+                per_page:per_page
+              }; 
+              this.$store.dispatch('user/getUserList',data)
+              .then(resp => 
+              { 
+                this.usersData = resp;
+                console.log(resp);
+                this.$refs.table.refresh();
+              })
+              .catch(err => console.log(err));*/
+            })
+            .catch(err => console.log(err));
+        }).catch(() => console.log("cancel dialog"))
     },
   },
   created:function()
   {
-    let filter = this.filter;
-    let curPage = 1;
+    let key_words = this.filter;
+    let page = 1;
+    let per_page = 2;
     let data = {
-                  filter:filter,
-                  curPage:curPage}; 
+              key_words:key_words,
+              page:page,
+              per_page:per_page
+                }; 
      this.$store.dispatch('user/getUserList',data)
       .then(resp => 
       { 
         this.usersData = resp;
+        console.log(resp);
         this.$refs.table.refresh();
       })
       .catch(err => console.log(err));     
@@ -112,10 +158,22 @@ export default {
 </script>
 <style>
  .table-content{
+  font-size: 16px;
   height: auto;
-  display: flex;
-  min-height: 100em;
+  display: flex;  
  }
+  .table-content.tablet
+  {
+    min-height: 60em;
+  }
+  .table-content.desktop
+  {
+    min-height: 100em;
+  }
+  .table-content.mobile
+  {
+    min-height: 30em;
+  }
   .VuejsDialog
   {
     position: absolute;
@@ -123,7 +181,11 @@ export default {
     width: 100%;
     height: 50px;
   }
-  .title-UserList{
+  
+  /*title user list-----------------------------------------------*/
+
+
+  .title-UserList-wrap{
     display: inline-block;
     width: 100%;
     color: #dfe6e9;
@@ -132,6 +194,19 @@ export default {
     font-family:FreeMono, monospace;
     font-weight: 500;
   }
+  /*responesive*/
+  .title-UserList.mobile
+  {
+    font-size: 1.2em;
+  }
+  .title-UserList.tablet
+  {
+    font-size: 1.5em;
+  }
+
+
+
+
   .table-component div a
   {
     display: block;
@@ -142,10 +217,8 @@ export default {
     color: white;
     font-weight: 700;
   }
-  .table-component input{
-    font-size: 1em;
+  .table-component input{  
     display: flex;
-    width: 18em;
     float: right;
     justify-content: center;
     align-items: center;
@@ -157,23 +230,60 @@ export default {
     transition: 0.4s;
     color: white;
     font-weight: 400;
-    border-radius: 18px;
+    border-radius: 18px;   
     padding: .7em;
+     width: 18em;
+     font-size: 1em;
   }
+  .table-component.mobile input
+  {
+     width: 10em;
+     font-size: 0.6em;
+  }
+  .table-component.tablet input
+  {
+     width: 15em;
+     font-size: 0.8em;
+  }
+
+
   .table-component input:hover{
     background-color: #304FFE;
   }
   ::placeholder{
   color: white;
   }
+
+
+
   .userlist-table{
-    position: absolute;
-    top: 8%;
-    left: 10%;
-    background-color: none;
+    position: absolute;  
+    background-color: none;  
+  }
+  .userlist-table.mobile
+  {
+    font-size: 0.2em;
     width: 80%;
     height: 90%;
+    left: 7%;
+    top: 14%;
   }
+  .userlist-table.tablet
+  {
+    font-size: 0.7em;
+    width: 80%;
+    height: 90%;
+    top: 8%;
+    left: 10%;
+  }
+  .userlist-table.desktop
+  {
+    width: 80%;
+    height: 90%;
+    top: 8%;
+    left: 10%;
+  }
+
   .pagination
   {
     text-align: center;
