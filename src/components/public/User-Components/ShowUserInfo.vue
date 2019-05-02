@@ -10,10 +10,10 @@
 
         <div class="avatarZone" :class="$mq">
           <mq-layout mq="tablet+">
-            <avatar image="https://nguoinoitieng.tv/images/nnt/98/0/bc39.jpg" :size="16" ></avatar>
+            <avatar image="https://nguoinoitieng.tv/images/nnt/98/0/bc39.jpg" :size="102" ></avatar>
           </mq-layout>
           <mq-layout mq="mobile">
-            <avatar image="https://nguoinoitieng.tv/images/nnt/98/0/bc39.jpg" :size="8" ></avatar>
+            <avatar image="https://nguoinoitieng.tv/images/nnt/98/0/bc39.jpg" :size="48" ></avatar>
           </mq-layout>
           <h5 id="id-user">ID:{{user_data.id}}</h5>
         </div>
@@ -322,6 +322,7 @@ export default {
   {
     background-color: #000000;
     border-radius: 12px;
+    width: 100%;
   }
 
 
@@ -637,7 +638,7 @@ export default {
 
   .info-line a.desktop
   {
-    font-size: 18px;
+    font-size: 20px;
   }
   .info-line a.tablet
   {
@@ -800,7 +801,7 @@ export default {
   right: 5em;
   top: 10em;
   width: 45%;
-  height: 30em;
+  height: 31em;
 }
 
 
