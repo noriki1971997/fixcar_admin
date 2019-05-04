@@ -32,7 +32,7 @@ Vue.use(VuejsDialog)
 Vue.use(VueMq, {
   breakpoints: {
     mobile: 450,
-    tablet: 900,
+    tablet: 1200,
     desktop: Infinity,
   }
 })

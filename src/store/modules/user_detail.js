@@ -23,7 +23,7 @@ export default {
 	actions: {	  	
 	    getUserDetail({commit},user_id)
 	    {
-	    	/*let user_detail = {
+	    	let user_detail = {
 	    	id:123456,
         	Ho:'Nguyen',
         	Ten:'Viet Phi',
@@ -31,18 +31,25 @@ export default {
         	Birthday:'12/12/2019',
         	PhoneNumber:'01212040198',
         	Address:'k2/duong Nguyen Sinh Sac,Quan Lien Chieu,thanh pho Da Nang',
-        	isProvider: true,
+        	isProvider: false,
         	status:'Active'
-	    	};*/
+	    	};
 	    	return new Promise((resolve, reject) => {
-	            axios.get("http://13.67.50.208:3003/api/user/"+user_id)
+	            /*axios.get("http://13.67.50.208:3003/api/user/"+user_id+"/profile")
 	            .then(resp => {
 	                console.log(resp);
+	                axios.get("http://13.67.50.208:3003/api/address/detail/"+resp.data.data.address_id)
+	                .then(resp => {
+	                	    console.log(resp);
+	                 })
+	                .catch(err => {
+	                		reject(err)
+	            	})
 	                let user_detail = {
-	                	id:resp.data.data.id,
-	                	Name:resp.data.data.profle.full_name,
-	                	Email:resp.data.data.email,
-	                	Birthday:resp.data.data.profle.birthday,
+	                	id:resp.data.data.account_id,
+	                	Name:resp.data.data.full_name,
+	                	Email:"email@email.com",
+	                	Birthday:resp.data.data.birthday,
 	                	PhoneNumber:resp.data.data.phone,
 	                	Address:"",
 	                	isProvider:false,
@@ -53,9 +60,9 @@ export default {
 	            .catch(err => {
 	                reject(err)
 	                console.log("get table data fail")
-	            })
+	            })*/
 
-	        //resolve(user_detail);
+	        resolve(user_detail);
 	        //commit('storeUserDetail', user_detail);
 
 	        })	    	

@@ -16,7 +16,7 @@
          </table-column>
          <table-column label="" :sortable="false" :filterable="false">
            <template slot-scope="row">
-              <i class="far fa-trash-alt" @click="deleteUser(row.Ten)"></i>
+              <i class="far fa-trash-alt detele-user-icon" @click="deleteUser(row.id)"></i>
            </template>
          </table-column>
       </table-component>
@@ -49,7 +49,7 @@ export default {
     {
       let key_words = this.filter;
       let page = newVal;
-      let per_page = 2;
+      let per_page = 6;
       let data = {
               key_words:key_words,
               page:page,
@@ -88,7 +88,7 @@ export default {
 
       let key_words = this.filter;
       let page = 1;
-      let per_page = 2;
+      let per_page = 6;
       let data = {
               key_words:key_words,
               page:page,
@@ -139,7 +139,7 @@ export default {
   {
     let key_words = this.filter;
     let page = 1;
-    let per_page = 2;
+    let per_page = 6;
     let data = {
               key_words:key_words,
               page:page,
@@ -183,6 +183,20 @@ export default {
   }
   
   /*title user list-----------------------------------------------*/
+  .title-UserList
+  {
+    color: #f5f6fa;
+    border: 0.5px solid #718093;
+    background-color: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.3);
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;      
+    text-align: center;
+    border-radius: 2em;
+    padding: 0.3em;
+    width: 18em; 
+  }
 
 
   .title-UserList-wrap{
@@ -201,7 +215,7 @@ export default {
   }
   .title-UserList.tablet
   {
-    font-size: 1.5em;
+    font-size: 1.2em;
   }
 
 
@@ -223,7 +237,9 @@ export default {
     justify-content: center;
     align-items: center;
     text-align: left;
-    background-color: #e84393;
+    background-color: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.7);
+    color: rgba(0, 0, 0, 0.7);
     outline: none;
     border: none;
     text-decoration: white;
@@ -248,7 +264,7 @@ export default {
 
 
   .table-component input:hover{
-    background-color: #304FFE;
+    background-color: black;
   }
   ::placeholder{
   color: white;
@@ -258,7 +274,7 @@ export default {
 
   .userlist-table{
     position: absolute;  
-    background-color: none;  
+    background-color: none;
   }
   .userlist-table.mobile
   {
@@ -273,14 +289,14 @@ export default {
     font-size: 0.7em;
     width: 80%;
     height: 90%;
-    top: 8%;
+    top: 13%;
     left: 10%;
   }
   .userlist-table.desktop
   {
     width: 80%;
     height: 90%;
-    top: 8%;
+    top: 18%;
     left: 10%;
   }
 
@@ -288,9 +304,9 @@ export default {
   {
     text-align: center;
     padding: .5em 0px;
-    background-color: none;
     list-style-type: none;
     display: block;
+
   }
   .pagination li
   {
@@ -300,6 +316,9 @@ export default {
     height: 2em;
     line-height: 2em;
     margin: 1em;
+    background-color: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.7);
+    color: rgba(0, 0, 0, 0.7);
   }
   .pagination li a
   {
@@ -324,6 +343,7 @@ export default {
   font-family: sans-serif;
   font-weight: 400;
   max-height: 100%;
+  
   }
   .table-component__table-wrapper {
   overflow-x: auto;
@@ -332,6 +352,7 @@ export default {
   border: solid 1px #ddd;
   border-bottom: none;
   border-radius: 6px;
+
   }
   .table-component__table {
   min-width: 100%;
@@ -343,21 +364,29 @@ export default {
   .table-component__table td {
   padding-top: 1em;
   padding-bottom: 1em;
+  padding-left: 2.3em;
   vertical-align: top;
-  text-align: center;
-  background-color: #212121;
-  color:#80DEEA;
+  text-align: left;
+  background-color: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.7);
+  color: rgba(0, 0, 0, 0.7);
+  color: #E0E3DA;
   font-size: 1em;
   }
 
   .table-component__table th {
-  background-color: #424242;
-  color: #00C853;
+  background-color: black;
+  color: white;
   text-transform: uppercase;
   white-space: nowrap;
   font-size: 1em;
-  text-align: center;
+  text-align: left;
   padding-top: 1em;
   padding-bottom: 1em;
+  padding-left: 2.3em;
+ }
+ .detele-user-icon
+ {
+  color:#ff3838;
  }
 </style>

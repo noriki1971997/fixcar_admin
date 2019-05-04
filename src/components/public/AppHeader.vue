@@ -43,12 +43,12 @@
 
   #AppHeader img{
   	position: absolute;
-    top: 25%;
+    top: 35%;
     left: 5%;
   }
   #AppHeader #sologan{
     position: absolute;
-    top: 30%;
+    top: 35%;
     left: 10%;
     font-size: 30px;
     font-family: Lobster;
@@ -85,8 +85,8 @@
   #hello-admin span{
     color: white;
     background:none;
-    font-family: Lobster;
     float: left;
+    font-weight: 700;
   }
   #hello-admin:hover > #logout-btn{
     background-image: url('../../assets/logoutbtn.png');

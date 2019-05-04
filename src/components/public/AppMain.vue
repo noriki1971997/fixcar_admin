@@ -89,7 +89,7 @@
   	}
   	.btn-openMenu.desktop
   	{
-  		margin-top: 2em;
+  		margin-top: 4em;
   		font-size: 32px;
   		left: 5%;
   	}
@@ -121,12 +121,14 @@ export default {
   			if(sessionStorage.getItem('currentPage') == page)
   			{
   				this.$router.go();
+          this.$store.dispatch('dashBoard/closeMenu');
   			}
   			else
   			{
   				this.nameOfComponent = page;
   				sessionStorage.setItem('currentPage',this.nameOfComponent);
   				console.log(sessionStorage.getItem('currentPage'));
+          this.$store.dispatch('dashBoard/closeMenu');
   			}
   		
   	}

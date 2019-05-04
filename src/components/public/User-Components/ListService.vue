@@ -2,7 +2,7 @@
 	<div :showList="showList" class="service-body" :services="services" :class="$mq">
 		<transition name="fade-flipper">
       <div class="slide-service-list" v-show="showList" :class="$mq">
-       <h3 class="title-provider-service" :class="$mq">Service</h3>
+       <h3 class="title-provider-service" :class="$mq">Dịch vụ</h3>
        <swiper :options="swiperOption" class="swiper-wrap-service" :class="$mq">
 
           <swiper-slide class="slide" v-for="(service,index) in services" :key="index" :class="$mq">
@@ -11,17 +11,17 @@
 
               <div class="service-info-line" :class="$mq">
                 <a class="title-row-ser">Tên dịch vụ:</a>
-                <a class="service-info-content">{{service.name}}</a>
+                <a class="service-info-content padding-title">{{service.name}}</a>
               </div>
 
               <div class="service-info-line" :class="$mq">
                 <a class="title-row-ser">Giá sàn:</a>
-                <a class="service-info-content" >{{service.minvalue}}</a>
+                <a class="service-info-content padding-title" >{{service.minvalue}}</a>
               </div>
 
               <div class="service-info-line" :class="$mq">
                 <a class="title-row-ser">Giá trần:</a>
-                <a class="service-info-content" >{{service.maxvalue}}</a>
+                <a class="service-info-content padding-title" >{{service.maxvalue}}</a>
               </div>
 
               <div class="service-info-line  large-area" :class="$mq">
@@ -88,8 +88,10 @@ export default {
 <style>
 .service-body
 {
-  background-color: #2d2d2d;
   border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0);
+  background: rgba(0, 0, 0, 0);
+  color: rgba(0, 0, 0, 0); 
 }
 .service-body.desktop
 {
@@ -110,12 +112,19 @@ export default {
 .title-provider-service
 {
   text-align: center;
-  font-family: Drifttype;
+  font-family: Mesothelioma-Regular;
   color: white;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  background-color: rgba(1, 225, 117, 0.3);
+  background: rgba(1, 225, 117, 0.3);
+  color: rgba(1, 225, 117, 0.3);
+  color: white;
+  border-radius: 8px;
 }
 .title-provider-service.desktop
 {
-  font-size: 1.3em;
+  font-size: 1.6em;
 }
 .title-provider-service.tablet
 {
@@ -127,7 +136,9 @@ export default {
 }
 .slide-service-list
 {
-  background-color: #2d2d2d;
+  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.5);
   color: white;
 }
 
@@ -158,16 +169,12 @@ export default {
 }
 .service-list-detail
 {
-
   display: inline-table;
   width: 100%;
   height: 100%;
-  font-family: Mesothelioma-Regular;
-  
 }
 .service-info-line
 {
-  border: 0.3px solid #16EF93;
   display: flex;
   width: 100%;
   height: 2em;
@@ -175,6 +182,7 @@ export default {
   align-items: center;
   font-weight: 700;
   box-sizing: border-box;
+  border-bottom: 1px solid white;
 
 }
 .large-area
@@ -183,16 +191,15 @@ export default {
 }
 .service-info-line .title-row-ser
 {
-  color: #16EF93;
-  font-family: PlayfairDisplay-Bold;
+  color: white;
   align-items: center;
-  width: 40%;
+  width: 20%;
   text-align: left;
   margin-left: 1em;
 }
 .service-info-content
 {
-  color: #16EF93;
+  color: white;
 }
 #title-service
 {
@@ -214,6 +221,16 @@ export default {
 {
   font-size: 8px;
 }
+
+.padding-title
+{
+  padding-left: 20%;
+}
+
+
+
+
+
 @font-face {
 font-family: "PlayfairDisplay-Bold";
 src: url("../../../assets/PlayfairDisplay-Bold.ttf");

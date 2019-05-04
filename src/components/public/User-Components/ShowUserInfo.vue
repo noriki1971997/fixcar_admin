@@ -2,7 +2,7 @@
   <div class="info-context" :class="$mq">
    
     <div class="profile-title" :class="$mq">
-      <h1 :class="$mq">PROFILE</h1>
+      <h1 :class="$mq">Hồ Sơ</h1>
     </div>
 
     <vue-flip :active-click="isAbleClickPanel" class="user-info" width="" height="" :class="$mq">
@@ -47,9 +47,6 @@
            :class="$mq"
            :style="{height:heightBack}">
 
-        <div class="logo-provider" :class="$mq">
-          <h4 :class="$mq">Provider Info</h4>
-        </div>
 
         <div class="not-provider" v-show="!isProvider">
           <a>Người dùng chưa đăng kí trở thành nhà cung cấp</a>
@@ -104,13 +101,14 @@
       </div>
     </transition>
 
-  
-    <ListService 
-      :class="$mq" 
-      class="listService-wrap" 
-      :showList="flipper" 
-      :services="services">
-    </ListService>
+    <mq-layout mq="desktop">
+      <ListService 
+        :class="$mq" 
+        class="listService-wrap" 
+        :showList="flipper" 
+        :services="services">
+      </ListService>
+    </mq-layout>
   </div>
   
 </template>
@@ -147,13 +145,13 @@ export default {
       swiperOption: {
           slidesPerView: 'auto',
           centeredSlides: true,
-          spaceBetween: 30,
+          spaceBetween: 5,
           pagination: {
             el: '.swiper-pagination',
             clickable: true
           }
        },
-      srcImgs:['https://wikicachlam.com/wp-content/uploads/2018/07/nhung-bo-phim-cua-kim-so-hyun-hay-nhat-4.jpg','https://2sao.vietnamnetjsc.vn/images/2019/01/03/15/31/cung-1.jpg','https://i.pinimg.com/originals/18/8b/38/188b3867b07de650f25fdd5556c443f6.jpg']
+      srcImgs:['https://static1.squarespace.com/static/5912373d46c3c48ff6f237f7/t/5952975b03596e92bc3bc3a4/1498586048363/general-car-repair-CA-Motor-Works.jpg','http://www.mycong.com/wp-content/uploads/2016/08/Auto-Repair.jpg','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYjvSVJuDE7RpBMXqpY3X9WuTwEEKSZeDXEI8mWbIfTITGahIQ']
       ,
       services:
       [{name:"Thay lốp",minvalue:"100.000đ",maxvalue:"120.000đ",desc:"thay lốp sdsdjsd",note:"sdsdsdsdsd"},
@@ -194,7 +192,7 @@ export default {
 
     heightBack()
     {
-      return this.$mq ==='mobile' ? '18em' : '36em'
+      return this.$mq ==='mobile' ? '18em' : '28em'
     },
 
   },
@@ -234,17 +232,19 @@ export default {
   .profile-title{
     display: inline-block;
     width: 100%;
-    color: #ffffff;
     text-align: center;
+
   }
   .profile-title h1
   {
     position: relative;
     margin-left: auto;
-    margin-right: auto;
-    background-color: #2f3640;       
+    margin-right: auto;      
     text-align: center; 
+    color: #f5f6fa;
     border: 0.5px solid #718093;
+    background-color: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.3);
   }
   .profile-title h1.desktop
   {
@@ -270,6 +270,7 @@ export default {
 
   .info-context
   {   
+    color: white;
     display: flex;
     width: 100%;
   }
@@ -295,11 +296,11 @@ export default {
   }
   .user-info.desktop
   {
-    width: 40%;
+    width: 30%;
     height: 30em;
-    font-size: 16px;
-    top: 10em;
-    left: 5%;
+    font-size: 12px;
+    top: 15em;
+    left: 10%;
   }
   .user-info.tablet
   {
@@ -320,9 +321,11 @@ export default {
   /*Flip----------------------------------------------------------------------------*/
   .front
   {
-    background-color: #000000;
     border-radius: 12px;
     width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.3);
+    color: rgba(0, 0, 0, 0.3);
   }
 
 
@@ -335,6 +338,9 @@ export default {
     background-color: #000000;
     border-radius: 12px;
     position: relative;
+    background-color: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.3);
+    color: rgba(0, 0, 0, 0.3);
   } 
   /*responsive-----*/
 
@@ -375,7 +381,7 @@ export default {
   }
   .back-click span.desktop
   {
-    font-size: 16px;
+    font-size: 12px;
   }
   .back-click span.tablet
   {
@@ -477,7 +483,7 @@ export default {
   .not-provider a
   {
     color: white;
-    font-size: 20px;
+    font-size: 12px;
   }
 
   #id-user{
@@ -492,18 +498,16 @@ export default {
   }
   .provider.desktop
   {
-    height: 63%;
-    bottom: 0%;
+    top: 2%;
   }
   .provider.tablet
   {
-    height: 63%;
-    bottom: 1%;
+    top: 1%;
   }
   .provider.mobile
   {
     height: 20%;
-    top: 20%;
+    top: 1%;
   }
 
 
@@ -516,7 +520,7 @@ export default {
   }
   .provider-line.desktop
   {
-    height: 3em;
+    height: 3.8em;
     margin-bottom: 1em;
   }
   .provider-line.tablet
@@ -541,7 +545,7 @@ export default {
   }
   .provider-line span.desktop
   {
-    font-size: 18px;
+    font-size: 14px;
   }
   .provider-line span.tablet
   {
@@ -556,17 +560,16 @@ export default {
 
 
   .content-info-provider
-  {
-    
-    color: #F4D03F;
+  {    
+    color: white;
     font-weight: 600;
     border-radius: 2px;
-    border: .7px solid #08D9D6;
     align-items: center;
     display: grid;
     padding-left: 2em;
     padding-right: 2em;
     margin-left: 1em;
+    margin-top: 0.5em;
     background-color: none;
   }
   .content-info-provider.desktop
@@ -599,7 +602,7 @@ export default {
     width: 100%;
     border-color: #f349eb;
     border-radius: 0.5em;
-    box-sizing:border-box;;
+    box-sizing:border-box;
   }
   .basic-info.desktop
   {
@@ -638,11 +641,11 @@ export default {
 
   .info-line a.desktop
   {
-    font-size: 20px;
+    font-size: 16px;
   }
   .info-line a.tablet
   {
-    font-size: 18px;
+    font-size: 16px;
   }
   .info-line a.mobile
   {
@@ -656,21 +659,20 @@ export default {
 
   .address
   {
-    color: #f5f6fa;
-   
+    color: #dff9fb;  
     display: flex;
     float: right;
-    height: 2em;
+    height: 3em;
     
   }
   .address.desktop
   {
-    font-size: 18px;
+    font-size: 16px;
     width: 86%;
   }
   .address.tablet
   {
-    font-size: 18px;
+    font-size: 16px;
     width: 85%;
   }
   .address.mobile
@@ -752,11 +754,11 @@ export default {
 {
   font-family: Aeonik, sans-serif;
   font-weight: 400;
-  color: #FFAB00;
+  color: white;
 }
 .title-provider-picture.desktop
 {
-  font-size: 1.5em;
+  font-size: 1.3em;
 }
 .title-provider-picture.tablet
 {
@@ -792,16 +794,16 @@ export default {
 .slide-imgservice.tablet
 {
   left: 20%;
-  top: 30em;
+  top: 25em;
   width: 60%;
   height: 15em;
 }
 .slide-imgservice.desktop
 {
-  right: 5em;
-  top: 10em;
-  width: 45%;
-  height: 31em;
+  left:10%;
+  top: 32em;
+  width: 30%;
+  height: 18em;
 }
 
 
@@ -809,13 +811,11 @@ export default {
 {
   width: 100%;
   height: 100%;
-  border: 0.5px solid white;
   border-radius: 0.5em;
 }
 .each-slide{
   font-size: 38px;
   font-weight: 700;
-  background-color: #030201;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -825,6 +825,9 @@ export default {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.3);
+  color: rgba(0, 0, 0, 0.3);
 }
 .image-servicelist
 {
@@ -845,8 +848,8 @@ export default {
 .listService-wrap.desktop
 {
   width: 100%;
-  left: 30%;
-  top: 50em;
+  right: 10%;
+  top: 10em;
 }
 .listService-wrap.tablet
 {

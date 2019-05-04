@@ -3,7 +3,7 @@
 		<transition>
       <keep-alive>
         <router-view></router-view>
-         <img src="https://c.pxhere.com/images/76/da/95e0136b716eef371eb788907dca-1452559.jpg!d">
+         <img src="../../assets/tree.jpg">
       </keep-alive>
     </transition>
 	</div>
@@ -36,7 +36,7 @@ export default {
 .background_cover {
     min-width: 100%;
     width: 100%;
-    background-image: url(https://c.pxhere.com/images/76/da/95e0136b716eef371eb788907dca-1452559.jpg!d);
+    background-image: url(../../assets/tree.jpg);
     background-attachment: scroll;
     background-size: cover;
     background-repeat: repeat;
@@ -47,11 +47,11 @@ export default {
   }
   .background_cover.tablet
   {
-    height: 80em;
+    height: 50em;
   }
   .background_cover.desktop
   {
-    height: 100em;
+    height: 60em;
   }
 
 
