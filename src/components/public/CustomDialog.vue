@@ -31,14 +31,26 @@
 .modal-mask {
   position: fixed;
   z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   background-color: rgba(0, 0, 0, .5);
   display: table;
   transition: opacity .3s ease;
 }
+.modal-mask.desktop
+{
+  top: 0;
+  left: 80%;
+}
+.modal-mask.tablet
+{
+  top: 0;
+  left: 5%;
+}
+.modal-mask.mobile
+{
+  top: 0;
+  left: 25%;
+}
+
 
 .modal-wrapper {
   display: table-cell;
@@ -67,7 +79,7 @@
 }
 .modal-container.mobile
 {
-  width: 10em;
+  width: 15em;
   margin: 0px auto;
   padding: 0.5em 0.7em;
 }

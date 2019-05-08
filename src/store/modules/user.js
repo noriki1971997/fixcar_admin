@@ -39,7 +39,7 @@ export default {
 					        totalPages : totalPages
 				        }
 	                };
-	                //commit('getUserList',table)               
+	                commit('getUserList',table)               
 	                console.log("get table data success");
 	                resolve(table);
 	            })

@@ -1,10 +1,10 @@
 <template>
 	<div class="background_cover" :class="$mq">
 		<transition>
-      <keep-alive>
-        <router-view></router-view>
+      <div>
+         <router-view></router-view>
          <img src="../../assets/tree.jpg">
-      </keep-alive>
+      </div>
     </transition>
 	</div>
 </template>

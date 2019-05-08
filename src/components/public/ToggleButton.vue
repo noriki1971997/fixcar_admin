@@ -4,9 +4,13 @@
 		<input :class="$mq" type="checkbox" class="checkbox" @change="onHandleChange" :style="{backgroundColor:switch_color}">
     <label v-if="checked" class="btnActived" :class="$mq">Actived</label>
     <label v-if="!checked" class="btnBlocked" :class="$mq">Blocked</label>
+  
+  <customDialog ref="dialog"></customDialog>
 	</div>
 </template>
+
 <script>
+import customDialog from './CustomDialog.vue'
 export default {
   name: 'ToggleButton',
   props: {
@@ -17,10 +21,12 @@ export default {
 
   },
   data(){
-    console.log(this.value);
-    const checked = this.value=='Active'?true:false;
-    const left_pos= this.checked?'2.8em':'0em';
-    const switch_color = this.checked?'#44bd32':'#D50000';
+
+    const checked = (this.value==="Active")?true:false;
+
+    const left_pos = checked?'2.8em':'0em';
+
+    const switch_color = (checked)?'#44bd32':'#D50000';
   	return{
       checked,
       left_pos,
@@ -63,28 +69,20 @@ export default {
     }
   },
   components:{
-  
+  customDialog
   },
   methods:{
   	onHandleChange()
     {
-      this.$dialog.confirm("Bạn chắc chắn muốn thay đổi", {
-          loader: true}).then(dialog => {
-            this.$store.dispatch('user_detail/changeUserStatus',this.$route.params.userid)
+       this.$refs.dialog.open("Xác nhận","Bạn muốn thay đổi trạng thái của tài khoản này?").then((dialog) =>{
+            this.$store.dispatch('user_detail/changeUserStatus',{id:this.$route.params.userid,status:this.value})
             .then(resp => 
-              { 
-                console.log('thay doi ht');
-                this.checked = !this.checked;
-              })
-            .catch(err => console.log(err)); 
-            setTimeout(() => {
-                console.log('Huy thay doi');
-                dialog.close();
-            }, 2500);
-          })
-            .catch(() => {
-            console.log('Hủy xóa');
-      });
+            { 
+              console.log(resp);
+              this.checked = !this.checked;
+            })
+            .catch(err => console.log(err));
+        }).catch(() => console.log("cancel dialog"))
     }
   },
   
@@ -213,4 +211,8 @@ label
   bottom: 1.2em;
   left: 1.8em;
 }
+
+
+
+
 </style>

@@ -3,6 +3,7 @@
     <div class="title-UserList-wrap">
       <h1 :class="$mq" class="title-UserList">Danh sách người dùng</h1>
     </div>
+    
     <div class="userlist-table" :class="$mq">
       <table-component :data="usersDataFunc" :show-caption="false" @filterContent="filterChanged" ref="table" :class="$mq">
          <table-column show="id" label="Id"></table-column>
@@ -11,17 +12,12 @@
          <table-column show="status" label="Trạng thái" :filterable="false"></table-column>
          <table-column label="" :sortable="false" :filterable="false">
            <template slot-scope="row">
-              <i class="far fa-eye" @click="viewUserInfo(row.id)"></i>
-           </template>
-         </table-column>
-         <table-column label="" :sortable="false" :filterable="false">
-           <template slot-scope="row">
-              <i class="far fa-trash-alt detele-user-icon" @click="deleteUser(row.id)"></i>
+              <i class="far fa-eye" @click="viewUserInfo(row.id,row.status)"></i>
            </template>
          </table-column>
       </table-component>
     </div>
-    <customDialog ref="dialog"></customDialog>
+    
     <customDialog ref="notification">
       <footer></footer>
     </customDialog>
@@ -72,8 +68,8 @@ export default {
   customDialog
   },
   methods:{
-  	viewUserInfo:function function_name(ID) {
-         this.$router.push({ name: 'DashBoard-UserList-ShowUserInfo', params: { userid: ID } });
+  	viewUserInfo:function function_name(ID,status) {
+         this.$router.push({ name: 'DashBoard-UserList-ShowUserInfo', params: { userid: ID,status:status } });
     },
 
     usersDataFunc:function function_name()
@@ -107,32 +103,7 @@ export default {
 
     deleteUser(ID)
     {
-      this.$refs.dialog.open("Xác nhận","Nếu xóa bảng ghi này thì sẽ không hoàn tác được. Bạn muốn tiếp tục ?").then((dialog) =>{
-            this.$store.dispatch('user/deleteUser',ID)
-            .then(resp => 
-            { 
-              //show noti detele successfully
-              this.$refs.notification.open(resp);
-
-              /*let key_words = this.filter;
-              let page = this.currentPage;
-              let per_page = 2;
-              let data = {
-                key_words:key_words,
-                page:page,
-                per_page:per_page
-              }; 
-              this.$store.dispatch('user/getUserList',data)
-              .then(resp => 
-              { 
-                this.usersData = resp;
-                console.log(resp);
-                this.$refs.table.refresh();
-              })
-              .catch(err => console.log(err));*/
-            })
-            .catch(err => console.log(err));
-        }).catch(() => console.log("cancel dialog"))
+      
     },
   },
   created:function()

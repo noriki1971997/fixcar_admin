@@ -10,10 +10,10 @@
 
         <div class="avatarZone" :class="$mq">
           <mq-layout mq="tablet+">
-            <avatar image="https://nguoinoitieng.tv/images/nnt/98/0/bc39.jpg" :size="102" ></avatar>
+            <avatar :image="getAvatar()" :size="102" ></avatar>
           </mq-layout>
           <mq-layout mq="mobile">
-            <avatar image="https://nguoinoitieng.tv/images/nnt/98/0/bc39.jpg" :size="48" ></avatar>
+            <avatar :image="getAvatar()" :size="48" ></avatar>
           </mq-layout>
           <h5 id="id-user">ID:{{user_data.id}}</h5>
         </div>
@@ -29,12 +29,13 @@
           <span class="info-line" :class="$mq"><i class="fas fa-birthday-cake icon-info"></i><a :class="$mq">{{user_data.Birthday}}</a></span>
           <span class="info-line" :class="$mq">
             <i class="fas fa-map-marked-alt icon-info"></i>
-            <div class="address" :class="$mq">{{user_data.Address}}</div>
+            <div class="address" :class="$mq">{{user_data.Address_detail}}</div>
           </span>
           <span class="info-line" :class="$mq">
             <i class="fas fa-key icon-info"></i>
             <a class="activeBtn">
-              <ToggleButton :value="user_data.status"></ToggleButton>
+              <ToggleButton :value="Status">
+              </ToggleButton>
             </a>
           </span>
           <span :class="$mq" class="info-line note-click" @mouseover="isAbleClickPanel=true" @mouseout="isAbleClickPanel=false">Click để xem thông tin nhà cung cấp >></span>
@@ -55,28 +56,33 @@
         <div class="provider" v-show="isProvider" :class="$mq">
 
           <div class="provider-line" :class="$mq">
+            <span :class="$mq">Tên Cửa hàng:</span>
+            <div class="content-info-provider" :class="$mq">{{provider_data.Name}}</div>
+          </div>
+
+          <div class="provider-line" :class="$mq">
             <span :class="$mq">Số chứng minh thư:</span>
-            <div class="content-info-provider" :class="$mq">206217626</div>
+            <div class="content-info-provider" :class="$mq">{{provider_data.id_personal}}</div>
           </div>
 
           <div class="provider-line" :class="$mq">
             <span :class="$mq">Số điện thoại:</span>
-            <div class="content-info-provider" :class="$mq">206217626</div>
+            <div class="content-info-provider" :class="$mq">{{provider_data.PhoneNumber}}</div>
           </div>
 
           <div class="provider-line" :class="$mq">
             <span :class="$mq">Mở cửa:</span>
-            <div class="content-info-provider" :class="$mq">6:00AM</div>
+            <div class="content-info-provider" :class="$mq">{{provider_data.OpenTime}}</div>
           </div>
 
           <div class="provider-line" :class="$mq">
             <span :class="$mq">Đóng cửa:</span>
-            <div class="content-info-provider" :class="$mq">6:00PM</div>
+            <div class="content-info-provider" :class="$mq">{{provider_data.CloseTime}}</div>
           </div>
 
           <div class="provider-line" :class="$mq">
             <span :class="$mq">Địa chỉ:</span>
-            <div :style="{height:'3em'}"class="content-info-provider" :class="$mq">k60/Nguyen Luong bang, quan Lien Chieu,thanh pho Da Nang</div>
+            <div :style="{height:'3em'}"class="content-info-provider" :class="$mq">{{provider_data.Address}}</div>
           </div>
 
         </div>
@@ -92,8 +98,8 @@
       <div class="slide-imgservice" v-show="flipper" :class="$mq">
        <h3 class="title-provider-picture" :class="$mq">Một số hình ảnh</h3>
        <swiper ref="awesomeSwiperA" :options="swiperOption" class="swiper-wrap" :class="$mq">
-          <swiper-slide v-for="(srcImg,index) in srcImgs" :key="index" class="each-slide">
-            <div class="image-servicelist" :style="{backgroundImage:'url('+srcImg+')'}">             
+          <swiper-slide v-for="(img,index) in provider_data.ServicesImg" :key="index" class="each-slide">
+            <div class="image-servicelist" :style="{backgroundImage:'url('+img+')'}">             
             </div>
           </swiper-slide>         
         <div class="swiper-pagination"  slot="pagination"></div>
@@ -109,6 +115,8 @@
         :services="services">
       </ListService>
     </mq-layout>
+
+
   </div>
   
 </template>
@@ -127,19 +135,41 @@ import VueFlip from 'vue-flip';
 import GmapCustomMarker from 'vue2-gmap-custom-marker';
 import 'swiper/dist/css/swiper.css';
 import { swiper, swiperSlide } from 'vue-awesome-swiper';
+
+import customDialog from '../CustomDialog.vue'
 export default {
   name: 'ShowUserInfo',
   data(){
   	return{
+      ID:this.$route.params.userid,
+      Status:this.$route.params.status,
       user_data:{
+        avatar:"",
         id:0,
+        Address_str:"",
+        Address_detail:"",
         Name:"",
         Email:'',
         Birthday:'',
         PhoneNumber:'',
+        Address_str:"",
+        Address_detail:"",
         isProvider: false,
         status:'',
       },
+
+      provider_data:{
+        Name:"",
+        id_personal:"",
+        PhoneNumber:"",
+        OpenTime:"",
+        CloseTime:"",
+        Address:"",
+        Address_str:"",
+        ServicesImg:[]
+      },
+
+
       flipper:false,
       isAbleClickPanel:false,
       swiperOption: {
@@ -151,14 +181,8 @@ export default {
             clickable: true
           }
        },
-      srcImgs:['https://static1.squarespace.com/static/5912373d46c3c48ff6f237f7/t/5952975b03596e92bc3bc3a4/1498586048363/general-car-repair-CA-Motor-Works.jpg','http://www.mycong.com/wp-content/uploads/2016/08/Auto-Repair.jpg','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYjvSVJuDE7RpBMXqpY3X9WuTwEEKSZeDXEI8mWbIfTITGahIQ']
-      ,
-      services:
-      [{name:"Thay lốp",minvalue:"100.000đ",maxvalue:"120.000đ",desc:"thay lốp sdsdjsd",note:"sdsdsdsdsd"},
-      {name:"Thay lốp",minvalue:"100.000đ",maxvalue:"120.000đ",desc:"thay lốp sdsdjsd",note:"sdsdsdsdsd"},
-      {name:"Thay lốp",minvalue:"100.000đ",maxvalue:"120.000đ",desc:"thay lốp sdsdjsd",note:"sdsdsdsdsd"},
-      {name:"Thay lốp",minvalue:"100.000đ",maxvalue:"120.000đ",desc:"thay lốp sdsdjsd",note:"sdsdsdsdsd"},
-      {name:"Thay lốp",minvalue:"100.000đ",maxvalue:"120.000đ",desc:"thay lốp sdsdjsd",note:"sdsdsdsdsd"}]
+      services:[],
+
   	};
   },
   computed:{
@@ -192,17 +216,60 @@ export default {
 
     heightBack()
     {
-      return this.$mq ==='mobile' ? '18em' : '28em'
+      return this.$mq ==='mobile' ? '18em' : '34em'
     },
 
+    
   },
   watch:{
-    'flipper':function(newVal,oldVal)
+    'isProvider':function(newVal,oldVal)
     {
+      if(newVal = true)
+      {
+         this.$store.dispatch('user_detail/getProviderDetail',this.$route.params.userid)
+        .then(resp => 
+        { 
+          this.provider_data = resp;
+        })
+        .catch(err => console.log(err)); 
+
+
+        this.$store.dispatch('user_detail/getProviderServices',this.$route.params.userid)
+        .then(resp => 
+          { 
+            this.services = resp;
+          })
+        .catch(err => console.log(err)); 
+
+      }
+    },
+
+    'user_data.Address_str':function(newVal,oldVal)
+    {
+      this.$store.dispatch('user_detail/getAddressFunction',newVal)
+      .then(resp => 
+        { 
+          this.user_data.Address_detail += resp;
+
+        })
+      .catch(err => console.log(err));
+    },
+
+    'provider_data.Address_str':function(newVal,oldVal)
+    {
+      this.$store.dispatch('user_detail/getAddressFunction',newVal)
+      .then(resp => 
+        { 
+          this.provider_data.Address = resp;
+        })
+      .catch(err => console.log(err));
     }
+
+
+     
   },
   components:{
-  Avatar,ToggleButton,VueFlip,GmapCustomMarker,swiper,swiperSlide,ListService
+  Avatar,ToggleButton,VueFlip,GmapCustomMarker,swiper,swiperSlide,ListService,customDialog
   },
   methods:{
     frontClick()
@@ -213,17 +280,23 @@ export default {
     {
       this.flipper=(this.isAbleClickPanel)?false:true;
     },
+
+    getAvatar()
+    {
+      return this.user_data.avatar;
+    },
+
+
   },
   created:function()
   {
-    console.log(this.$route.params.userid);
     this.$store.dispatch('user_detail/getUserDetail',this.$route.params.userid)
     .then(resp => 
       { 
         this.user_data = resp;
-        console.log(this.user_data.status);
       })
-    .catch(err => console.log(err)); 
+    .catch(err => console.log(err));
+
   }
  };
 </script>
@@ -406,11 +479,11 @@ export default {
   }
   .avatarZone.desktop
   {
-    height: 25%;
+    height: 23%;
   }
   .avatarZone.tablet
   {
-    height: 25%;
+    height: 23%;
   }
   .avatarZone.mobile
   {
@@ -489,6 +562,9 @@ export default {
   #id-user{
     position: relative;
     margin-top: 2px; 
+    color:black;
+    font-size: 1.5em;
+    margin-bottom: 0;
   }
 /*PROVIDER-----------------------------------------------------------------*/
   .provider
@@ -794,14 +870,14 @@ export default {
 .slide-imgservice.tablet
 {
   left: 20%;
-  top: 25em;
+  top: 28em;
   width: 60%;
   height: 15em;
 }
 .slide-imgservice.desktop
 {
   left:10%;
-  top: 32em;
+  top: 36em;
   width: 30%;
   height: 18em;
 }
