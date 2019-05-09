@@ -1,3 +1,3 @@
-/dashBoard /dashBoard
-/dashBoard/userList/showUserList /dashBoard/userList/showUserList
-/dashBoard/userList/:id /dashBoard/userList/:id
+/dashBoard /
+/dashBoard/userList/showUserList /dashBoard/userList/
+/dashBoard/userList/:id /dashBoard/userList/
