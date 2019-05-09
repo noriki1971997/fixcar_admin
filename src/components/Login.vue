@@ -243,8 +243,11 @@ export default {
                   this.visibilityUN = 'visible';
                 }
             })
-          .catch(err => console.log(err));
+          .catch(err =>{
+                  this.msgErrorUserName = "Sai tài khoản hoặc mật khẩu";
+                  this.visibilityUN = 'visible';
+                   console.log(err)} );
       }
   }
-}
+};
 </script>
