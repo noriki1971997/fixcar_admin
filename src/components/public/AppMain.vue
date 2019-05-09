@@ -108,6 +108,9 @@ export default {
   computed:{
   	
   },
+  watch:{
+
+  },
   components:{
   	Menu,Home,UserList
   },
@@ -129,6 +132,7 @@ export default {
   				sessionStorage.setItem('currentPage',this.nameOfComponent);
   				console.log(sessionStorage.getItem('currentPage'));
           this.$store.dispatch('dashBoard/closeMenu');
+          
   			}
   		
   	}
@@ -137,6 +141,10 @@ export default {
   {
   	this.nameOfComponent = sessionStorage.getItem('currentPage') || 'Home';
   	console.log(this.nameOfComponent);
+  },
+  beforeDestroy()
+  {
+    console.log("App Main");
   }
  };
 </script>

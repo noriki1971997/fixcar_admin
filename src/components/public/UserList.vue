@@ -1,11 +1,7 @@
 <template>
 	<div class="background_cover" :class="$mq">
-		<transition>
-      <div>
          <router-view></router-view>
          <img src="../../assets/tree.jpg">
-      </div>
-    </transition>
 	</div>
 </template>
 <script>
@@ -27,7 +23,13 @@ export default {
   },
   created:function()
   {
+    sessionStorage.setItem('currentPage','UserList');
     this.$router.push({name:'DashBoard-UserList-ShowUserList'});
+  },
+  beforeDestroy()
+  {
+    console.log("user list");
+
   }
  };
 </script>

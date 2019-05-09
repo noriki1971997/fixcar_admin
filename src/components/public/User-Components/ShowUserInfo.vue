@@ -5,7 +5,7 @@
       <h1 :class="$mq">Hồ Sơ</h1>
     </div>
 
-    <vue-flip :active-click="isAbleClickPanel" class="user-info" width="" height="" :class="$mq">
+    <vue-flip :active-click="isAbleClickPanel" class="user-info" width="" height="" :class="$mq" :style="{left:leftPositionPanel}">
       <div slot="front" @click="frontClick" :class="$mq">
 
         <div class="avatarZone" :class="$mq">
@@ -49,11 +49,11 @@
            :style="{height:heightBack}">
 
 
-        <div class="not-provider" v-show="!isProvider">
-          <a>Người dùng chưa đăng kí trở thành nhà cung cấp</a>
+        <div class="not-provider" v-show="!isProvider||(Status != 'Active')">
+          <a>Tài khoản chưa đăng kí hoặc bị block</a>
         </div>
 
-        <div class="provider" v-show="isProvider" :class="$mq">
+        <div class="provider" v-show="isProvider && (Status == 'Active')" :class="$mq">
 
           <div class="provider-line" :class="$mq">
             <span :class="$mq">Tên Cửa hàng:</span>
@@ -219,6 +219,18 @@ export default {
       return this.$mq ==='mobile' ? '18em' : '34em'
     },
 
+    leftPositionPanel()
+    {
+      if(!this.flipper)
+      {
+        return this.$mq ==='desktop' ? '35%' : '20%'
+      }
+      else
+      {
+        return this.$mq ==='desktop' ? '10%' : '20%'
+      }
+      
+    }
     
   },
   watch:{
@@ -446,7 +458,7 @@ export default {
     color: white;
     text-align: center;
     position: absolute;
-    bottom: 0;
+    bottom: 2%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;

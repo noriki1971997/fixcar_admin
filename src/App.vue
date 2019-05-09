@@ -4,7 +4,8 @@
 <style>
  body
   {
-    background-color: #3c6382;
+    background-color: #572060;
+    background-image: url('./assets/Theme3.jpg');
   }
 </style>
 <script>

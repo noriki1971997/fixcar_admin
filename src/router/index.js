@@ -10,7 +10,7 @@ import store from '../store/index.js'
 
 import ShowUserList from '@/components/public/User-Components/ShowUserList.vue'
 import ShowUserInfo from '@/components/public/User-Components/ShowUserInfo.vue'
-ShowUserInfo
+
 Vue.use(Router)
 
 let router = new Router({
@@ -31,27 +31,27 @@ routes:
       },
        children:
         [{
-          path:'home',
-          name: 'DashBoard-Home',
-          component: Home
-        },
-        {
           path:'userList',
           component: UserList,
           name: 'DashBoard-UserList',
-          children:
-          [{
-            path:'showUserList',
-            component: ShowUserList,
-            name: 'DashBoard-UserList-ShowUserList',
-          },
-          {
-            path:':userid',
-            component: ShowUserInfo,
-            name: 'DashBoard-UserList-ShowUserInfo',
-            props: true,
-          }]
-        }]
+            children:
+            [{
+              path:'showUserList',
+              component: ShowUserList,
+              name: 'DashBoard-UserList-ShowUserList',
+            },
+            {
+              path:':userid',
+              component: ShowUserInfo,
+              name: 'DashBoard-UserList-ShowUserInfo',
+              props: true,
+            }]
+        },
+        {
+          path:'',
+          name: 'DashBoard-Home',
+          component: Home
+        },]
     },
   ]
 })
@@ -66,6 +66,7 @@ router.beforeEach((to, from, next) => {
   } else {
     next() 
   }
+
 })
 
 export default router

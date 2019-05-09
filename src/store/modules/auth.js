@@ -29,13 +29,28 @@ export default {
 	            commit('auth_request')
 	            axios.post("http://13.67.50.208:3003/api/auth/login", user)
 	            .then(resp => {
-	                const token = resp.data.data.token
-	                console.log(token)
-	                localStorage.setItem('token', token)
-	                // Add the following line:
-	                axios.defaults.headers.common['Authorization'] = token
-	                commit('auth_success', token)
-	                console.log("login success")
+
+	            	let checkAdmin = resp.data.data.isAdmin;
+	            	console.log(checkAdmin);
+
+
+	            	if(checkAdmin)
+	            	{
+		            	const token = resp.data.data.token
+		                localStorage.setItem('token', token)
+		                // Add the following line:
+		                axios.defaults.headers.common['Authorization'] = token
+		                commit('auth_success', token)
+		                console.log("login success")
+		                resolve(true);
+		                sessionStorage.setItem('currentPage','Home');
+	            	}
+	            	else
+	            	{
+	            		resolve(false);
+	            	}
+
+	                
 	                resolve(resp)
 	            })
 	            .catch(err => {
@@ -51,6 +66,7 @@ export default {
 		      	commit('logout')
 		      	localStorage.removeItem('token')
 		      	delete axios.defaults.headers.common['Authorization']
+		      	console.log("logout");
 		      	resolve()
 		    })
 	  	}

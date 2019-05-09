@@ -199,6 +199,7 @@ export default {
 }
 .service-info-content
 {
+  width: 100%;
   color: white;
 }
 #title-service

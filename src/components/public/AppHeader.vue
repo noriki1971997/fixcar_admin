@@ -3,7 +3,7 @@
 		<img src="../../assets/fix-car-icon.png">
 
     <mq-layout mq="desktop">
-      <span id="sologan">Fix car service</span>
+      <span id="sologan" @click="BackHome">Fix car service</span>
     </mq-layout>
 
     <div id="hello-admin" :class="$mq">
@@ -146,6 +146,11 @@ export default {
         .then(() => {
           this.$router.push('/')
         })
+    },
+    BackHome()
+    {
+       this.$router.push({name:'DashBoard-Home'});
+       console.log("backhome");
     }
   }
 }

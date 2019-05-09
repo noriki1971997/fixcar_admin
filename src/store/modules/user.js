@@ -3,21 +3,16 @@ import axios from 'axios'
 export default {
   namespaced: true,
  	state: {
- 		table:{
- 			data:[],
- 			pagination:
-        	{
-	          currentPage : 1,
-	          totalPages : 1
-        	}
- 		},
- 		filter:''
-  		
+		dataInput: {
+            key_words:"",
+            page:1,
+            per_page:6
+                },
 	},
 	mutations: {
 	  	storeUserList(state,data)
 	  	{
-	  		state.table = data.table
+	  		state.dataInput = data;
 	  	}
 	},
 	actions: {	  	
@@ -26,7 +21,7 @@ export default {
 	    	return new Promise((resolve, reject) => {
 	            axios.get("http://13.67.50.208:3003/api/user",{params: dataInput})
 	            .then(resp => {
-	            	console.log(resp);
+
 	                let currentPage = resp.data.data.current_page;
 	                let totalPages = resp.data.data.last_page;
 	                let data = resp.data.data.data;
@@ -38,10 +33,12 @@ export default {
 					        currentPage : currentPage,
 					        totalPages : totalPages
 				        }
-	                };
-	                commit('getUserList',table)               
+	                };	               
+	                commit('storeUserList',dataInput);               
 	                console.log("get table data success");
 	                resolve(table);
+
+
 	            })
 	            .catch(err => {
 	                reject(err)
@@ -65,6 +62,6 @@ export default {
 	    },
 	},
 	getters : {
-	  
+		dataInput: state => state.dataInput,
 	}
 }

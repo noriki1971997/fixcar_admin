@@ -108,22 +108,21 @@ export default {
   },
   created:function()
   {
-    let key_words = this.filter;
-    let page = 1;
-    let per_page = 6;
-    let data = {
-              key_words:key_words,
-              page:page,
-              per_page:per_page
-                }; 
-     this.$store.dispatch('user/getUserList',data)
-      .then(resp => 
+
+    let data = this.$store.getters['user/dataInput'];
+    this.$store.dispatch('user/getUserList',data)
+    .then(resp => 
       { 
         this.usersData = resp;
         console.log(resp);
         this.$refs.table.refresh();
       })
-      .catch(err => console.log(err));     
+    .catch(err => console.log(err)); 
+    
+  },
+  beforeDestroy()
+  {
+    console.log("Show user list");
   }
  };
 </script>

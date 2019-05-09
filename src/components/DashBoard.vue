@@ -20,6 +20,7 @@ export default {
   name: 'DashBoard',
   components:{
   	AppHeader,AppFooter,AppMain
-  }
-}
+  },
+};
+
 </script>

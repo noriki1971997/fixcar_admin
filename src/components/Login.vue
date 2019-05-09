@@ -2,9 +2,11 @@
   <div id="login" :class="$mq">
 
     <h1 :class="$mq" class="title-login">LOGIN</h1>
-    <input type="text" placeholder="Email" @input="showNoticeUsName" :class="$mq">
+    <input type="text" placeholder="Email" @input="showNoticeUsName" :class="$mq" 
+    v-on:keyup.enter="goToDashBoard">
     <i :style={visibility:visibilityUN}>{{msgErrorUserName}}</i>
-    <input :class="$mq" type="password" placeholder="Password" @input="showNoticePssword">
+    <input :class="$mq" type="password" placeholder="Password" @input="showNoticePssword"
+     v-on:keyup.enter="goToDashBoard">
     <i :style={visibility:visibilityPW}>{{msgErrorPassword}}</i>
     <button :class="$mq" @click="goToDashBoard">OK</button>
 
@@ -16,7 +18,9 @@
 <style>
 /*Login page-------------------------------------------------*/
   #login{
-    background-color: #031E27;
+    background-color: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.5);
     position: absolute;
     top: 50%;
     left: 50%;
@@ -218,16 +222,28 @@ export default {
           this.msgErrorPassword = "Password không được để trống";
           this.visibilityPW = 'visible';
         }
+
+
           let  value = this.email;
           let  password = this.password;
           let data = {
              value: value,
              password: password
           }
+
           this.$store.dispatch('auth/login',data)
-          .then(() => this.$router.push('/dashBoard'))
+          .then(reps => {
+                if(reps)
+                {
+                  this.$router.push('/dashBoard')
+                }
+                else
+                {
+                  this.msgErrorUserName = "Sai tài khoản hoặc mật khẩu";
+                  this.visibilityUN = 'visible';
+                }
+            })
           .catch(err => console.log(err));
-       
       }
   }
 }
