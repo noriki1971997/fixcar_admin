@@ -239,12 +239,12 @@ export default {
                 }
                 else
                 {
-                  this.msgErrorUserName = "Sai tài khoản hoặc mật khẩu";
+                  this.msgErrorUserName = "Sai email hoặc mật khẩu";
                   this.visibilityUN = 'visible';
                 }
             })
           .catch(err =>{
-                  this.msgErrorUserName = "Sai tài khoản hoặc mật khẩu";
+                  this.msgErrorUserName = "Sai email hoặc mật khẩu";
                   this.visibilityUN = 'visible';
                    console.log(err)} );
       }
