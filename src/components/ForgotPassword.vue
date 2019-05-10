@@ -2,7 +2,7 @@
   <div>
     <div class="form-submit-container">
                       <form @submit.prevent="handleSubmit" class="form-content">
-                        <div class="form-group" >
+                          <div class="form-group" >
                               <label class="lb-title-form-group">ĐỔI MẬT KHẨU</label>
                           </div>
                           <div class="form-group" >
@@ -136,7 +136,6 @@ export default {
                 console.log(resp);
               })
               .catch(err => {
-                  reject(err)
                   console.log("get table data fail")
               })
     }
