@@ -10,7 +10,7 @@
                 <input type="text" v-model="password.new" class="input-forgotpass" />
             </div>
             <div class="form-group" >
-                <label class="lb-form-group">{{result}}</label>
+                <label class="lb-form-group msgNotify">{{result}}</label>
             </div>
             <div class="form-group" >
                 <label class="lb-form-group">Xác nhận mật khẩu</label>
@@ -108,6 +108,10 @@
   color:white;
   font-weight: 700;
 }
+.msgNotify
+{
+  color:#F50057;
+}
 </style>
 
 
@@ -140,10 +144,10 @@ export default {
       axios.post("http://13.67.50.208:3003/api/auth/forgot-pass/",{token:this.token,password: this.password.new,c_password:this.password.confirm})
               .then(resp => {
                 console.log(resp);
-                this.result = resp;
+                this.result = resp.data.message;
               })
               .catch(err => {
-                  console.log("get table data fail")
+                 this.result = "Lỗi không thể đổi mật khẩu";
               })
     }
   }
