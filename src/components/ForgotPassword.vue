@@ -69,6 +69,7 @@
 }
 .lb-form-group
 {
+  font-size: 18px;
   color:#f1f1f1 ;
   padding-bottom: 1em;
   font-weight: 500;
@@ -76,7 +77,7 @@
 .lb-title-form-group
 {
   text-align: center;
-  font-size: 18px;
+  font-size: 32px;
   font-weight: 700;
   color:#f9f8eb;
 }
