@@ -1,5 +1,5 @@
 <template>
-	<div class="Toggle" :value="value" :class="$mq">
+	<div class="Toggle" :class="$mq">
     <div  :class="$mq" class="swicth-btn" :style="{left:left_pos_func}"></div>
 		<input :class="$mq" type="checkbox" class="checkbox" @change="onHandleChange" :style="{backgroundColor:switch_color}">
     <label v-if="checked" class="btnActived" :class="$mq">Actived</label>
@@ -24,49 +24,37 @@ export default {
 
     const checked = (this.value==="Active")?true:false;
 
+
+
     const left_pos = checked?'2.8em':'0em';
 
     const switch_color = (checked)?'#44bd32':'#D50000';
+
+    const status = this.value;
   	return{
       checked,
       left_pos,
-      switch_color
+      switch_color,
+      status
   	};
+  },
+  created(){
+    console.log(1234)
+    console.log(this.value )
   },
   computed:{
     left_pos_func()
     {
       return this.left_pos;
     },
+
+    returnStatus()
+    {
+      return this.status;
+    }
   },
   watch:{
-    'value':function(newVal, oldVal)
-    {
-      if(newVal == 'Active')
-      {
-        this.checked = true;
-      }
-      else
-      {
-        this.checked = false;
-      }
-    },
 
-
-
-    'checked':function(newVal, oldVal)
-    {
-      if(newVal)
-      {
-        this.left_pos = '2.8em';
-        this.switch_color = '#44bd32';
-      }
-      else
-      {
-        this.left_pos = '0';
-        this.switch_color = '#D50000';
-      }
-    }
   },
   components:{
   customDialog
@@ -74,12 +62,26 @@ export default {
   methods:{
   	onHandleChange()
     {
-       this.$refs.dialog.open("Xác nhận","Bạn muốn thay đổi trạng thái của tài khoản này?").then((dialog) =>{
-            this.$store.dispatch('user_detail/changeUserStatus',{id:this.$route.params.userid,status:this.value})
+      console.log("status of user :");
+      console.log(this.checked);
+       this.$refs.dialog.open("Xác nhận","Bạn muốn thay đổi trạng thái của tài khoản này?")
+       .then((dialog) =>{
+
+            this.$store.dispatch('user_detail/changeUserStatus',{id:this.$route.params.userid,status:this.checked})
             .then(resp => 
             { 
               console.log(resp);
               this.checked = !this.checked;
+              if(this.checked)
+              {
+                this.left_pos = '2.8em';
+                this.switch_color = '#44bd32';
+              }
+              else
+              {
+                this.left_pos = '0';
+                this.switch_color = '#D50000';
+              }
             })
             .catch(err => console.log(err));
         }).catch(() => console.log("cancel dialog"))

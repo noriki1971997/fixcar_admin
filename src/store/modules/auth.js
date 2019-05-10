@@ -51,7 +51,7 @@ export default {
 	            	}
 
 	                
-	                resolve(resp)
+	                
 	            })
 	            .catch(err => {
 	                commit('auth_error')

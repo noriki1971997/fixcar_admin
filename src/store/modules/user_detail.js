@@ -117,12 +117,13 @@ export default {
 			timeout: 1000,
 			headers: {'Authorization': 'Bearer '+'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJwaGkubmd1eWVudmlldDE5N0BnbWFpbC5jb20iLCJhY2NvdW50X3R5cGUiOiJBRE1JTiIsInJvbGUiOjQsImlhdCI6MTU1NzMyNzk3OX0.eJuY7cBjYAX-TT4O_o9JXD1O3feCnYO0OkUSHMmP2_c'}
 			});
-	   	if(data.status == 'Active')
+	   	if(data.status)
 	   	{
 	   		return new Promise((resolve, reject) => {                        
 	            instance.post("user/"+data.id+"/block")
 	            .then(resp => {
-	                resolve(resp);
+
+	                resolve('Block');
 	            })
 	            .catch(err => {
 		            reject(err)
@@ -137,7 +138,7 @@ export default {
 	            instance.post("user/"+data.id+"/unblock")
 	            .then(resp => {
 	                resolve(resp);
-	                console.log(resp);
+	                console.log('Active');
 	            })
 	            .catch(err => {
 		            reject(err)

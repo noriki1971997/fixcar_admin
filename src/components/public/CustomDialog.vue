@@ -38,12 +38,12 @@
 .modal-mask.desktop
 {
   top: 0;
-  left: 80%;
+  left: 1%;
 }
 .modal-mask.tablet
 {
   top: 0;
-  left: 5%;
+  left: 8%;
 }
 .modal-mask.mobile
 {

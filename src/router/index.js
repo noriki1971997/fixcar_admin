@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login.vue'
+import ForgotPassword from '@/components/ForgotPassword.vue'
+import Token from '@/components/public/Token.vue'
 import Home from '@/components/public/Home.vue'
 import UserList from '@/components/public/UserList.vue'
 import DashBoard from '@/components/DashBoard.vue'
@@ -17,6 +19,19 @@ let router = new Router({
 mode: 'history',
 routes: 
   [
+    {
+      path: '/forgot-password',
+      name: 'forgot-password',
+      component: ForgotPassword,
+      children:[
+        {
+          path:':token',
+          component: Token,
+          name: 'forgot-password-token'
+        }
+      ]
+      
+    },
     {
       path: '/',
       name: 'Login',
