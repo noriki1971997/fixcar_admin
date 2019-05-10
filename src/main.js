@@ -10,7 +10,7 @@ import VuejsDialogMixin from 'vuejs-dialog/dist/vuejs-dialog-mixin.min.js';
 import 'vuejs-dialog/dist/vuejs-dialog.min.css';
 import { TableComponent, TableColumn} from './vue-table-component';
 import VueMq from 'vue-mq'
-
+import VeeValidate from "vee-validate";
 
 Vue.component('table-component', TableComponent)
 Vue.component('table-column', TableColumn)
@@ -26,7 +26,7 @@ Vue.config.productionTip = false
 Vue.use(router)
 Vue.use(store)
 Vue.use(VuejsDialog)
-
+Vue.use(VeeValidate)
 
 //define size of screen
 Vue.use(VueMq, {
