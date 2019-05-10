@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="form-submit-container">
                       <form @submit.prevent="handleSubmit" class="form-content">
                           <div class="form-group" >
@@ -18,7 +17,7 @@
                           </div>
                       </form>
       </div>
-  </div>
+
   
 </template>
 
@@ -42,7 +41,7 @@
 }
 .form-content
 {
-  padding-top: 1em;
+  padding-top: 3em;
   position: relative;
   width: 60%;
   height: 60%;
