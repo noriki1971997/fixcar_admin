@@ -1,21 +1,21 @@
 <template>
     <div class="form-submit-container">
-                      <form @submit.prevent="handleSubmit" class="form-content">
-                          <div class="form-group" >
-                              <label class="lb-title-form-group">ĐỔI MẬT KHẨU</label>
-                          </div>
-                          <div class="form-group" >
-                              <label class="lb-form-group">Mật khẩu mới</label>
-                              <input type="text" v-model="password.new" class="input-forgotpass" />
-                          </div>
-                          <div class="form-group" >
-                              <label class="lb-form-group">Xác nhận mật khẩu</label>
-                              <input type="text" v-model="password.confirm" class="input-forgotpass"/>
-                          </div>
-                          <div class="form-group-btn" >
-                              <button class="btn-primary">Gữi</button>
-                          </div>
-                      </form>
+        <form @submit.prevent="handleSubmit" class="form-content">
+            <div class="form-group" >
+                <label class="lb-title-form-group">ĐỔI MẬT KHẨU</label>
+            </div>
+            <div class="form-group" >
+                <label class="lb-form-group">Mật khẩu mới</label>
+                <input type="text" v-model="password.new" class="input-forgotpass" />
+            </div>
+            <div class="form-group" >
+                <label class="lb-form-group">Xác nhận mật khẩu</label>
+                <input type="text" v-model="password.confirm" class="input-forgotpass"/>
+            </div>
+            <div class="form-group-btn" >
+                <button class="btn-primary">Gữi</button>
+            </div>
+        </form>
       </div>
 
   
@@ -42,6 +42,7 @@
 .form-content
 {
   padding-top: 3em;
+  padding-bottom: 2em;
   position: relative;
   width: 60%;
   height: 60%;
@@ -75,7 +76,7 @@
 .lb-title-form-group
 {
   text-align: center;
-  font-size: 1.5em;
+  font-size: 18px;
   font-weight: 700;
   color:#f9f8eb;
 }
@@ -128,8 +129,7 @@ export default {
   methods:
   {
    handleSubmit(e) {
-      console.log("submit");
-      console.log(this.password.confirm);
+
       axios.post("http://13.67.50.208:3003/api/auth/forgot-pass/"+this.token,{token:this.token,password: this.password.new,c_password:this.password.confirm})
               .then(resp => {
                 console.log(resp);
