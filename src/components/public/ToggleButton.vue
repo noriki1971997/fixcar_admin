@@ -167,17 +167,13 @@ export default {
   align-items: center;
   margin-top: 3px;
 }
-label
+.btnActived
 {
   position: absolute;
   color: #E1F5FE;
   pointer-events: none;
   font-weight: 400;
   font-size: 0.7em;
-}
-.btnActived
-{
-
 }
 .btnActived.desktop
 {
@@ -197,6 +193,11 @@ label
 
 .btnBlocked
 {
+  position: absolute;
+  color: #E1F5FE;
+  pointer-events: none;
+  font-weight: 400;
+  font-size: 0.7em;
 }
 .btnBlocked.desktop
 {

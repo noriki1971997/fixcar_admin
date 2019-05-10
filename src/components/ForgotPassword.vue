@@ -4,9 +4,13 @@
             <div class="form-group" >
                 <label class="lb-title-form-group">ĐỔI MẬT KHẨU</label>
             </div>
+
             <div class="form-group" >
                 <label class="lb-form-group">Mật khẩu mới</label>
                 <input type="text" v-model="password.new" class="input-forgotpass" />
+            </div>
+            <div class="form-group" >
+                <label class="lb-form-group">{{result}}</label>
             </div>
             <div class="form-group" >
                 <label class="lb-form-group">Xác nhận mật khẩu</label>
@@ -121,7 +125,8 @@ export default {
         old:"",
         new:"",
         confirm:""
-      }
+      },
+      result:''
     }
   },
   created() {
@@ -132,9 +137,10 @@ export default {
   {
    handleSubmit(e) {
 
-      axios.post("http://13.67.50.208:3003/api/auth/forgot-pass/"+this.token,{token:this.token,password: this.password.new,c_password:this.password.confirm})
+      axios.post("http://13.67.50.208:3003/api/auth/forgot-pass/",{token:this.token,password: this.password.new,c_password:this.password.confirm})
               .then(resp => {
                 console.log(resp);
+                this.result = resp;
               })
               .catch(err => {
                   console.log("get table data fail")
