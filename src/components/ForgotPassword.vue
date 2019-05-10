@@ -56,7 +56,7 @@
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-  padding-top: 2em;
+  padding-top: 1em;
 }
 .input-forgotpass
 {
@@ -71,15 +71,16 @@
 {
   font-size: 18px;
   color:#f1f1f1 ;
-  padding-bottom: 1em;
+  padding-bottom: 3px;
   font-weight: 500;
 }
 .lb-title-form-group
 {
   text-align: center;
-  font-size: 32px;
+  font-size: 20px;
   font-weight: 700;
   color:#f9f8eb;
+  padding-bottom: 1em;
 }
 .form-group-btn
 {
