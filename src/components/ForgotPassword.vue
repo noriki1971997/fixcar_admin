@@ -147,7 +147,7 @@ export default {
                 this.result = resp.data.message;
               })
               .catch(err => {
-                 this.result = "Lỗi không thể đổi mật khẩu";
+                 this.result = err;
               })
     }
   }
