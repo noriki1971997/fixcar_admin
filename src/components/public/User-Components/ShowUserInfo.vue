@@ -93,9 +93,11 @@
 
       </div>
     </vue-flip>
-  
+    
+    <div v-show="isProvider && (Status == 'Active')">
     <transition name="fade-flipper">
-      <div class="slide-imgservice" v-show="flipper" :class="$mq">
+
+      <div  class="slide-imgservice" v-show="flipper" :class="$mq">
        <h3 class="title-provider-picture" :class="$mq">Một số hình ảnh</h3>
        <swiper ref="awesomeSwiperA" :options="swiperOption" class="swiper-wrap" :class="$mq">
           <swiper-slide v-for="(img,index) in provider_data.ServicesImg" :key="index" class="each-slide">
@@ -106,13 +108,14 @@
        </swiper>   
       </div>
     </transition>
-
+    </div>
     <mq-layout mq="desktop">
       <ListService 
         :class="$mq" 
         class="listService-wrap" 
         :showList="flipper" 
-        :services="services">
+        :services="services"
+        v-show="isProvider && (Status == 'Active')">
       </ListService>
     </mq-layout>
 
